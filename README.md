@@ -1,6 +1,6 @@
 # IdleProof
 
-An offline-first overnight electricity comparison tool for a participant-run shutdown experiment. Built for Green Shift Hacks (Devpost 31797). **Prepared locally; not registered or submitted.**
+An offline-first overnight electricity comparison tool for a participant-run shutdown experiment. Built for Green Shift Hacks (Devpost 31797). **Individual event registration is complete; final project submission remains pending.**
 
 ## Run
 
@@ -32,7 +32,7 @@ start,end,watts,phase
 
 Intervals are clipped to the selected local-time window and aligned by elapsed local clock time from its start. A two-pointer intersection calculates energy **only on common coverage** as average watts × hours /1000. Missing hours are separately disclosed; no imputation, baseline extrapolation, annual multiplication or carbon conversion occurs. Different valid subdivisions produce the same energy for the same constant power. Invalid timestamps, mixed offsets/DST, overlapping or duplicate readings, negative/nonfinite values, long spans and missing common coverage fail closed. Changing weather, occupancy or equipment can confound a before/after comparison. The tool does not establish that a decrease was caused by a shutdown, that baseline consumption is waste, or that equipment is safe to disconnect.
 
-Leave refrigeration, medical, safety and essential equipment alone. Meter accuracy, sensor calibration, participant permission and experiment comparability remain outside this prototype. Imported data are participant supplied and unverified; import does not establish measured origin. The demonstration has no measured environmental result, user study, certified savings, independent review or awards.
+Leave refrigeration, medical, safety and essential equipment alone. Meter accuracy, sensor calibration, participant permission and experiment comparability remain outside this prototype. Imported data are participant supplied and unverified; import does not establish measured origin. The demonstration has no measured environmental result, user study, certified savings, independent environmental-impact validation or awards.
 
 ## Files and tests
 

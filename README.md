@@ -1,6 +1,6 @@
 # IdleProof
 
-An offline-first overnight electricity comparison tool for a participant-run shutdown experiment. Built for Green Shift Hacks (Devpost 31797). **Individual event registration is complete; final project submission remains pending.**
+An offline-first overnight electricity comparison tool for a participant-run shutdown experiment. Built for Green Shift Hacks (Devpost 31797). **Individual event registration is complete; final project submission was completed on October 20, 2026.**
 
 ## Run
 

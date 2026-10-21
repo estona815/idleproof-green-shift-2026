@@ -21,3 +21,19 @@ test('empty and equal night windows rejected', () => { assert.throws(() => analy
 test('zero watts are valid, missing measurements are not zero', () => { const rows = demo().map(r => ({ ...r, watts: 0 })); const r = analyze(rows); near(r.differenceKwh, 0); near(r.comparableHours, 8); });
 test('data before night start excluded without adding duration', () => { const rows = demo(); rows.unshift({ ...rows[0], start: rows[0].start - 3600000, end: rows[0].start, watts: 999 }); near(analyze(rows).beforeKwh, .96); });
 test('multi-day span fails closed', () => { const rows = demo(); rows[7].end += 86400000 * 3; assert.throws(() => analyze(rows), /48 hours/); });
+
+test('10,000 CSV intervals accepted with or without a final newline', () => {
+  const header = 'start,end,watts,phase\n';
+  const row = '2026-10-20T22:00:00+09:00,2026-10-20T23:00:00+09:00,120,before';
+  for (const ending of ['', '\n', '\r\n']) {
+    const text = header + Array(10000).fill(row).join('\n') + ending;
+    assert.ok(new TextEncoder().encode(text).byteLength < 1000000);
+    assert.equal(parseCSV(text).length, 10000);
+  }
+});
+test('10,001 CSV intervals rejected regardless of final newline', () => {
+  const row = '2026-10-20T22:00:00+09:00,2026-10-20T23:00:00+09:00,120,before';
+  for (const ending of ['', '\n', '\r\n']) {
+    assert.throws(() => parseCSV('start,end,watts,phase\n' + Array(10001).fill(row).join('\n') + ending), /10,000/);
+  }
+});

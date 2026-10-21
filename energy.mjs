@@ -16,10 +16,11 @@ export function csvRows(text) {
       row.push(cell); cell = ''; closed = false;
       if (c !== ',') { if (row.some(x => x.trim())) rows.push(row); row = []; if (c === '\r' && text[i + 1] === '\n') i++; }
     } else { demand(!closed, 'Unexpected text after a quoted CSV field.'); cell += c; }
-    demand(rows.length <= 10000, 'At most 10,000 intervals are supported.');
+    demand(rows.length <= 10001, 'At most 10,000 intervals plus the header are supported.');
   }
   demand(!quoted, 'Unclosed CSV quote.');
   row.push(cell); if (row.some(x => x.trim())) rows.push(row);
+  demand(rows.length <= 10001, 'At most 10,000 intervals plus the header are supported.');
   return rows;
 }
 function stamp(value) {
